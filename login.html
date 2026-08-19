@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>KCCEMSR Attendance Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="index2.html" href="index2.html">
+  <style>
+    body {
+      min-height: 100vh;
+      min-width: 100vw;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: url('college-logo.jpg') center center/contain no-repeat, linear-gradient(120deg, #667eea55, #764ba288);
+      background-size: 510px, cover;
+      background-blend-mode: lighten;
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .kc-header-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .kc-header-logo img {
+      height: 100px;
+      width: 100px;
+      box-shadow: 0 0 14px #667eea33;
+      border-radius: 24px;
+      background: #fff;
+      padding: 1rem;
+    }
+
+    .kc-header-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.38rem;
+      margin-top: .7rem;
+      letter-spacing: 2.5px;
+      color: #4e446a;
+      font-weight: 700;
+      text-align: center;
+      text-shadow: 0 1px 12px #eef7ff24;
+    }
+
+    .login-card {
+      margin: 2.5rem auto 0 auto;
+      max-width: 410px;
+      background: rgba(255, 255, 255, 0.89);
+      backdrop-filter: blur(3.5px);
+      border-radius: 18px;
+      box-shadow: 0 0 60px #667eea30, 0 1.5px 6px #764ba212;
+      padding: 2.2rem 2.1rem 2rem 2.1rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      animation: revealCard 0.85s cubic-bezier(.5, 1.6, .2, .9);
+    }
+
+    @keyframes revealCard {
+      from {
+        transform: scale(0.85) translateY(70px);
+        opacity: .20;
+      }
+
+      to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .login-title {
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      color: #272d47;
+      margin-bottom: .5rem;
+      font-weight: 800;
+      font-size: 1.38rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .login-title i {
+      color: #667eea;
+      font-size: 1.45em;
+    }
+
+    .login-form-engr {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .login-form-engr label {
+      font-weight: 600;
+      color: #4865b1;
+      margin-bottom: .2rem;
+      font-size: 0.95em;
+      letter-spacing: .07em;
+      text-shadow: 0 1px 1px #fff7;
+    }
+
+    .login-form-engr select,
+    .login-form-engr input {
+      border: 2px solid #e6e6ff;
+      border-radius: 7.5px;
+      padding: .7rem;
+      font-size: 1rem;
+      background: #eef2fd28;
+      color: #31406c;
+      font-family: inherit;
+      transition: border 0.18s, box-shadow 0.19s;
+      font-weight: 500;
+    }
+
+    .login-form-engr select:focus,
+    .login-form-engr input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px #667eea44;
+    }
+
+    .engr-btn {
+      margin-top: .9rem;
+      width: 100%;
+      background: linear-gradient(110deg, #667eea 65%, #4299e1 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.04em;
+      border: none;
+      padding: .8rem 0;
+      border-radius: 8px;
+      box-shadow: 0 1.5px 10px #667eea19;
+      letter-spacing: 0.09em;
+      cursor: pointer;
+      transition: background .18s, transform .16s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+    }
+
+    .engr-btn:hover {
+      background: linear-gradient(90deg, #4299e1, #48bb78 78%);
+      transform: translateY(-1.5px) scale(1.023);
+    }
+
+    .engr-divider {
+      margin: .6rem 0 1rem 0;
+      border-bottom: 1.6px dashed #764ba282;
+      text-align: center;
+    }
+
+    .engr-id-tip {
+      text-align: center;
+      color: #415277;
+      font-size: .99em;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    .engr-error {
+      color: #f56565;
+      font-weight: 600;
+      text-align: center;
+      margin-top: 7px;
+    }
+
+    /* Student/Teacher icons */
+    .login-role-ico {
+      margin-left: 8px;
+      font-size: 1.13em;
+      color: #764ba2;
+    }
+
+    @media (max-width: 600px) {
+      .login-card {
+        padding: 1.1rem .40rem 1rem .40rem;
+        max-width: 98vw;
+      }
+
+      .kc-header-logo img {
+        height: 75px;
+        width: 75px;
+      }
+
+      .kc-header-logo {
+        margin-top: 1.25rem;
+      }
+
+      .engr-btn {
+        font-size: .98em;
+      }
+    }
+  </style>
+<style>
+/* Authentication gate */
+#attendanceApp { display: none; }
+body.authenticated #attendanceApp { display: block; }
+body.authenticated .login-card { display: none; }
+body.student-mode .attendance-actions,
+body.student-mode .subject-admin-actions,
+body.student-mode #addSubjectBtn,
+body.student-mode #fab,
+body.student-mode #subjectModal,
+body.student-mode .delete-subject-btn { display: none !important; }
+.auth-user-info { display:flex; align-items:center; gap:10px; }
+.logout-btn { border:0; border-radius:8px; padding:8px 12px; cursor:pointer; font-weight:600; }
+</style>
+</head>
+
+<body>
+  <div class="kc-header-logo">
+    <img src="college logo.png" alt="KC College logo" />
+    <div class="kc-header-title">K.C. College of Engineering</div>
+  </div>
+  <div class="login-card">
+    <div class="login-title">
+      <i class="fa-solid fa-gear"></i> Engineering Attendance Portal
+    </div>
+    <form class="login-form-engr" id="loginForm">
+      <div>
+        <label for="loginRole">I am a</label>
+        <select id="loginRole">
+          <option value="student">Student <span class="login-role-ico"><i class="fa-solid fa-user-graduate"></i></span>
+          </option>
+          <option value="teacher">Teacher <span class="login-role-ico"><i
+                class="fa-solid fa-chalkboard-teacher"></i></span></option>
+        </select>
+      </div>
+      <div>
+        <label for="loginEmail">College Email / Name</label>
+        <input id="loginEmail" required autocomplete="username" placeholder="Enter College Email or Name...">
+      </div>
+      <div>
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password" required autocomplete="current-password"
+          placeholder="Enter Password...">
+      </div>
+      <button type="submit" class="engr-btn"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</button>
+      <div id="loginError" class="engr-error" style="display:none;"></div>
+    </form>
+    <div class="engr-divider"></div>
+    <div class="engr-id-tip">Students: Use college email as ID. Teachers: Enter your name.<br><b>Project by KC
+        Engineering Students</b></div>
+  </div>
+  <script>
+    const students = {
+      "ce24.vinit.gaikwad@kccemsr.edu.in": "35",
+      "ce24.aditya.dubey@kccemsr.edu.in": "31",
+      "ce24.pratik.dembare@kccemsr.edu.in": "28"
+    };
+    const teachers = {
+      "shweta gaikwad": "1234",
+      "monali patil": "5678"
+    };
+
+    function applySession() {
+      const loggedIn = localStorage.getItem('attendanceLoggedIn') === 'true';
+      const role = localStorage.getItem('attendanceRole');
+      const user = localStorage.getItem('attendanceUser') || '';
+      if (!loggedIn || !role) {
+        document.body.classList.remove('authenticated', 'student-mode', 'teacher-mode');
+        return false;
+      }
+      document.body.classList.add('authenticated');
+      document.body.classList.toggle('student-mode', role === 'student');
+      document.body.classList.toggle('teacher-mode', role === 'teacher');
+      const label = document.getElementById('loggedInUser');
+      if (label) label.textContent = role === 'student' ? user : user.replace(/\b\w/g, c => c.toUpperCase());
+      return true;
+    }
+
+    document.getElementById('loginForm').onsubmit = function (ev) {
+      ev.preventDefault();
+      const role = document.getElementById('loginRole').value;
+      const user = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('loginPassword').value.trim();
+      const valid = role === 'student' ? students[user] === pass : teachers[user] === pass;
+      if (!valid) {
+        const err = document.getElementById('loginError');
+        err.style.display = 'block';
+        err.textContent = 'Invalid credentials!';
+        return;
+      }
+      localStorage.setItem('attendanceLoggedIn', 'true');
+      localStorage.setItem('attendanceRole', role);
+      localStorage.setItem('attendanceUser', user);
+      document.getElementById('loginError').style.display = 'none';
+      applySession();
+      if (window.app && typeof window.app.applyRolePermissions === 'function') window.app.applyRolePermissions();
+    };
+
+    function logoutUser(ev) {
+      if (ev) ev.preventDefault();
+      localStorage.removeItem('attendanceLoggedIn');
+      localStorage.removeItem('attendanceRole');
+      localStorage.removeItem('attendanceUser');
+      sessionStorage.clear();
+      // Force a clean login state and reload the page.
+      window.location.replace(window.location.pathname + '?loggedout=1');
+    }
+
+    // Attach after the full HTML is loaded because the Logout button is lower in the page.
+    document.addEventListener('DOMContentLoaded', function () {
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) logoutBtn.addEventListener('click', logoutUser);
+      applySession();
+    });
+
+    // Login is mandatory: dashboard remains hidden until valid credentials are supplied.
+    applySession();
+  </script>
+  <script src="script.js"></script>
+  <script src="script2.js"></script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AttendanceTracker calculator</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="index.html">
+</head>
+
+<body>
+  <div class="app-container" id="attendanceApp">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="log">
+          <i class="fas fa-calendar-check"></i>
+          <span>K.C college of engineering</span>
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+          </button>
+          <div class="user-profile">
+            <img
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23667eea'/%3E%3Ctext x='50' y='55' font-family='Arial' font-size='40' fill='white' text-anchor='middle'%3EU%3C/text%3E%3C/svg%3E"
+              alt="User">
+            <span id="loggedInUser">User</span>
+          </div>
+          <button class="logout-btn" id="logoutBtn" type="button">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Dashboard Overview -->
+      <section class="dashboard-section">
+        <div class="section-header">
+          <h2>Dashboard Overview</h2>
+          <div class="date-display" id="currentDate"></div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card primary">
+            <div class="stat-icon">
+              <i class="fas fa-percentage"></i>
+            </div>
+            <div class="stat-content">
+              <h3 id="overallPercentage">0%</h3>
+              <p>Overall Attendance</p>
+              <div class="stat-progress">
+                <div class="progress-bar" id="overallProgress"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-card success">
+            <div class="stat-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-content">
+              <h3 id="totalPresent">0</h3>
+              <p>Classes Attended</p>
+              <span class="trend positive">+2 this week</span>
+            </div>
+          </div>
+
+          <div class="stat-card warning">
+            <div class="stat-icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="stat-content">
+              <h3 id="totalAbsent">0</h3>
+              <p>Classes Missed</p>
+              <span class="trend negative">-1 this week</span>
+            </div>
+          </div>
+
+          <div class="stat-card info">
+            <div class="stat-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="stat-content">
+              <h3 id="remainingClasses">0</h3>
+              <p>Classes Remaining</p>
+              <span class="trend neutral">This semester</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Subject Management -->
+      <section class="subjects-section">
+        <div class="section-header">
+          <h2>Subject Management</h2>
+          <button class="btn btn-primary" id="addSubjectBtn">
+            <i class="fas fa-plus"></i>
+            Add Subject
+          </button>
+        </div>
+
+        <div class="subjects-grid" id="subjectsGrid">
+          <!-- Subject cards will be dynamically added here -->
+        </div>
+      </section>
+
+      <!-- Attendance Calculator -->
+      <section class="calculator-section">
+        <div class="section-header">
+          <h2>Attendance Calculator</h2>
+          <p>Calculate required attendance to meet minimum requirements</p>
+        </div>
+
+        <div class="calculator-grid">
+          <div class="calculator-card">
+            <h3>Quick Calculator</h3>
+            <div class="calculator-form">
+              <div class="input-group">
+                <label>Total Classes</label>
+                <input type="number" id="totalClasses" placeholder="Enter total classes" min="1">
+              </div>
+              <div class="input-group">
+                <label>Classes Attended</label>
+                <input type="number" id="attendedClasses" placeholder="Enter attended classes" min="0">
+              </div>
+              <div class="input-group">
+                <label>Required Percentage</label>
+                <select id="requiredPercentage">
+                  <option value="75">75% (Most Common)</option>
+                  <option value="80">80%</option>
+                  <option value="85">85%</option>
+                  <option value="90">90%</option>
+                </select>
+              </div>
+              <button class="btn btn-secondary" id="calculateBtn">
+                <i class="fas fa-calculator"></i>
+                Calculate
+              </button>
+            </div>
+          </div>
+
+          <div class="results-card">
+            <h3>Calculation Results</h3>
+            <div class="results-content" id="calculationResults">
+              <div class="result-placeholder">
+                <i class="fas fa-chart-line"></i>
+                <p>Enter your data and click calculate to see results</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analytics Section -->
+      <section class="analytics-section">
+        <div class="section-header">
+          <h2>Attendance Analytics</h2>
+          <div class="analytics-filters">
+            <select id="analyticsFilter">
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+              <option value="semester">This Semester</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="chart-container">
+            <canvas id="attendanceChart" width="400" height="200"></canvas>
+          </div>
+          <div class="insights-panel">
+            <h4>Key Insights</h4>
+            <div class="insights-list" id="insightsList">
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+
+    <div class="modal" id="subjectModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add New Subject</h3>
+          <button class="modal-close" id="closeModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="subjectForm">
+            <div class="input-group">
+              <label>Subject Name</label>
+              <input type="text" id="subjectName" placeholder="Enter subject name" required>
+            </div>
+            <div class="input-group">
+              <label>Subject Code</label>
+              <input type="text" id="subjectCode" placeholder="Enter subject code" required>
+            </div>
+            <div class="input-group">
+              <label>Total Classes per Semester</label>
+              <input type="number" id="totalSemesterClasses" placeholder="Enter total classes" min="1" required>
+            </div>
+            <div class="input-group">
+              <label>Choose Color</label>
+              <div class="color-picker">
+                <input type="color" id="subjectColor" value="#667eea">
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+              <button type="submit" class="btn btn-primary">Add Subject</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="fab" id="fab">
+      <i class="fas fa-plus"></i>
+    </div>
+  </div>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style2.css" />
+  <script src="script2.js"></script>
+</body>
+
+</html>

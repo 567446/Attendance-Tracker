@@ -1,0 +1,73 @@
+/* Fonts & Typography */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto+Mono&family=Montserrat:wght@500&display=swap');
+
+body, input, select, button {
+  font-family: 'Montserrat', 'Roboto Mono', monospace, sans-serif;
+  color: #364564;
+}
+
+/* Fancy header font */
+.kc-header-title, .login-title h3, .login-title {
+  font-family: 'Orbitron', 'Roboto Mono', monospace;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #283593; /* deep blue with personality */
+  text-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+}
+
+/* Input fields font */
+input, select {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  font-size: 1.05rem;
+  caret-color: #667eea;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Input focus state with glowing effect */
+input:focus, select:focus {
+  border-color: #4059f1;
+  box-shadow: 0 0 12px #4059f1aa;
+  outline: none;
+}
+
+/* Button fonts and polished effect */
+.engr-btn {
+  font-family: 'Orbitron', 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.12rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  filter: drop-shadow(0 2px 1px #4059f1aa);
+}
+
+/* Add subtle animation effect on headings */
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 5px #667eea88, 0 0 10px #764ba299;
+  }
+  50% {
+    text-shadow: 0 0 12px #667eeacc, 0 0 25px #4299e1cc;
+  }
+}
+
+.login-title {
+  animation: glow 3.8s ease-in-out infinite;
+}
+
+/* Login form labels */
+label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #3b4a72dd;
+}
+
+/* Small font adjustments for responsiveness */
+@media(max-width: 500px) {
+  .login-title, .kc-header-title {
+    font-size: 1.15rem;
+  }
+}
